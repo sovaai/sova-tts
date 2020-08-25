@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block title %}SOVA TTS{% endblock %}
+
+{% block head %}
+	<script type="text/javascript" src="{{ url_for('static', filename='speech/js/speechSynthesizer.js') }}"></script>
+{% endblock %}
+
+
+{% block sections %}
+    <section id="id-form-section">
+        <h1>
+            Speech Synthesis
+        </h1>
+        <div id="info">
+            Choose the voice, type text in the text area and press "enter". You can also specify additional options in the options form.
+        </div>
+        <select id="model-select-id">
+            {% for model in existing_models %}
+                <option value="{{ model }}">{{ model }}</option>
+            {% endfor %}
+        </select>
+
+        <textarea id="options" placeholder="Additional options form: tone_factor={0.75..1.5}, speed_factor={0.5..2.0}"></textarea>
+	<textarea id="text-input" onkeypress="send_form()" placeholder='Text area: type text and press "enter"'></textarea>
+        <div id="error_field" style="display: none;"></div>
+
+    </section>
+    <div id="synthesized_result">
+        <div id="synthesized_result_table">
+            <table id="table_result">
+                <thead>
+                <tr>
+		    <th class="model_audio">Audio</th>
+                    <th class="model_time">Synthesis time</th>
+		    <th class="model_name">Voice</th>
+                </tr>
+                </thead>
+                <tbody id="table_body_result">
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

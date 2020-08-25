@@ -1,0 +1,27 @@
+version: '2.3'
+
+services:
+  sova-tts-gpu:
+    restart: always
+    container_name: sova-tts-gpu
+    build:
+      context: .
+      dockerfile: Dockerfile.gpu
+    runtime: nvidia
+    image: sova-tts-gpu:master
+    volumes:
+      - .:/sova-tts
+    ports:
+      - 8899:8899
+
+  sova-tts:
+    restart: always
+    container_name: sova-tts
+    build:
+      context: .
+      dockerfile: Dockerfile.cpu
+    image: sova-tts:master
+    volumes:
+      - .:/sova-tts
+    ports:
+      - 8899:8899

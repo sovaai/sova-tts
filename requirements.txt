@@ -1,0 +1,20 @@
+Click==7.0
+Flask==1.1.1
+gunicorn==19.9.0
+itsdangerous==1.1.0
+Jinja2==2.10.1
+MarkupSafe==1.1.1
+Werkzeug==0.15.4
+uuid==1.30
+bs4==0.0.1
+numpy==1.19.1
+torch==1.4.0
+scipy==1.5.2
+Unidecode==1.1.1
+soundfile==0.10.3.post1
+matplotlib==2.1.0
+requests==2.24.0
+pyyaml==5.3.1
+colorama==0.4.3
+librosa==0.8.0
+-e git+https://github.com/sovaai/sova-tts-tps#egg=TPS

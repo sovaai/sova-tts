@@ -1,0 +1,58 @@
+general:
+  logging_level: "debug"
+  log_to_file: false
+
+  device: "cuda"
+
+  pause_type: "silence"
+  sentence_as_unit: true
+
+  duration:
+    sentence_delimiter: 10000
+    semicolon: 5000
+    colon: 3000
+    comma: 2000
+    space: 1000
+
+  spectrogram:
+    plot: false
+    save: false
+
+  waves:
+    save: true
+    format: wav
+    sampling_rate: 22050
+
+natasha:
+  data:
+    language: "ru_trans"
+    stress: true
+    phonemes: false
+    unit_max_length: 150
+
+  paths:
+    hparams: data/natasha/hparams_natasha.yaml
+    model: data/natasha/checkpoint_natasha
+    vocoder: data/natasha/waveglow_ljs_nvidia.pt
+    dict: data/ru_trans.dic
+    spectrogram_folder:
+    waves_folder: data/waves
+    ref_audio:
+    voice_control_config: data/natasha/voice_natasha.yaml
+
+ruslan:
+  data:
+    language: "ru_trans"
+    stress: true
+    phonemes: false
+    unit_max_length: 150
+
+  paths:
+    hparams: data/ruslan/hparams_ruslan.yaml
+    model: data/ruslan/checkpoint_ruslan
+    vocoder: data/ruslan/waveglow_ruslan.pt
+    dict: data/ru_trans.dic
+    spectrogram_folder:
+    waves_folder: data/waves
+    ref_audio:
+    voice_control_config: data/ruslan/voice_ruslan.yaml

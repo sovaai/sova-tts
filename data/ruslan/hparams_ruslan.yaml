@@ -1,0 +1,185 @@
+################################
+# Experiment Parameters        #
+################################
+device: "cuda:0"
+
+epochs: 150
+iters_per_checkpoint: 2500
+
+output_dir: /mnt/sda/data/weights/tacotron/v1.4/25-08-2020_ruslan
+log_dir: logs
+
+checkpoint: /mnt/sda/data/weights/tacotron2_statedict_converted.pt
+warm_start: true
+
+seed: 1234
+dynamic_loss_scaling: True
+fp16_run: False
+
+dist_backend: "nccl"
+dist_url: "tcp://localhost:54321"
+
+cudnn_enabled: True
+cudnn_benchmark: False
+
+ignore_layers: ['embedding.weight']
+
+################################
+# Data Parameters             #
+################################
+load_mel_from_disk: False
+audios_path: /mnt/sda/data/speakers/RUSLAN
+alignments_path:
+  original:
+  stressed:
+training_files: /mnt/sda/data/filelists/ruslan/ruslan_train.list
+validation_files: /mnt/sda/data/filelists/ruslan/ruslan_val.list
+
+language: "ru_trans" # possible entires: en, ru, ru_trans
+dict_path: /mnt/sda/data/ru_g2p_train.dic
+text_cleaners:
+# stress: Union[float, bool]. If float, the number must be in {0, 1} - the probability of including stressed
+# words into learning process
+stress: 0.8
+# phonemes: Union[float, bool]. If float, the number must be in {0, 1} - the probability of including phoneme
+# representation of words into learning process
+phonemes: False
+dict_prime: False
+word_level_prob: True
+
+shuffle: true
+optimize: false
+len_diff: 10
+
+################################
+# Audio Parameters             #
+################################
+max_wav_value: 32768.0
+sampling_rate: 22050
+filter_length: 1024
+hop_length: 256
+win_length: 1024
+n_mel_channels: 80
+mel_fmin: 0.0
+mel_fmax: 8000.0
+
+add_silence: True
+trim_silence: True
+trim_top_db: 45 # empirically for amai
+
+################################
+# Model Parameters             #
+################################
+symbols_embedding_dim: 512
+activation: "relu"
+
+# Encoder parameters
+encoder_kernel_size: 5
+encoder_n_convolutions: 3
+encoder_embedding_dim: 512
+
+# Decoder parameters
+n_frames_per_step: 1  # currently only 1 is supported
+decoder_rnn_dim: 1024
+prenet_dim: 256
+max_decoder_steps: 1000
+gate_threshold: 0.5
+p_attention_dropout: 0.1
+p_decoder_dropout: 0.1
+
+# Attention parameters
+attention_rnn_dim: 1024
+attention_dim: 128
+
+# Location Layer parameters
+attention_location_n_filters: 32
+attention_location_kernel_size: 31
+
+# Mel-post processing network parameters
+postnet_embedding_dim: 512
+postnet_kernel_size: 5
+postnet_n_convolutions: 5
+
+# GST reference encoder
+use_gst: False
+
+reference_encoder_filters: [32, 32, 64, 64, 128, 128]
+reference_encoder_kernel: [3, 3]
+reference_encoder_strides: [2, 2]
+reference_encoder_pad: [1, 1]
+reference_encoder_activation: "relu"
+
+# GST style token layer
+stl_token_num: 10
+stl_num_heads: 8
+
+gst_type: "text_predicted" # possible entries: 'simple', 'text_predicted'
+
+# TPCW-GST layer: combination weights for global style tokens predicted from text.
+# Trained jointly with GST layer, uses GST during inference.
+# tpcw_hidden_units: number of units in TPCW-GST hidden layers (`None` in the original paper)
+tpcw_hidden_units: [128]
+# TPSE-GST layer: style embedding predicted from text directly.
+# Trained jointly with GST layer, used independently during inference.
+# tpse_hidden_units: number of units in TPSE-GST hidden layers (64 used in the original paper)
+tpse_hidden_units: [128]
+
+################################
+# Optimization Hyperparameters #
+################################
+
+# loss functions parameters
+guided_attention_type: "diagonal" # possible entries: 'none', 'diagonal', 'prealigned'
+attention_weight: 1.0
+diagonal_factor: 0.15 #
+include_padding: False # how to calculate loss for attention: considering padding values or not
+
+# mel_loss_type: type of loss function used to penalize wrong mel predictions
+# possible entries: 'MSE', 'L1'
+mel_loss_type: "MSE"
+gate_positive_weight: 10.0
+
+# other parameters
+initscheme: "xavier_uniform"
+
+# optimizers from https://github.com/jettify/pytorch-optimizer
+optimizer: "adam" # possible entries: 'sgd', 'adam', 'radam', 'diffgrad', 'novograd', 'yogi', 'adabound'
+learning_rate: 1e-3
+weight_decay: 1e-6
+optim_options:
+
+# Lookahead wrapper around the optimizer, stabilizes exploration of the loss surface and improves convergence
+# examples: Ranger = RAdam + LookAhead
+with_lookahead: False
+
+use_saved_learning_rate: True
+lr_decay: 0.1
+lr_decay_milestones: [60, 90]
+
+grad_clip_thresh: 1.0
+batch_size: 12
+mask_padding: True  # set model's padded outputs to padded values
+
+##################################
+# MMI options                    #
+##################################
+use_mmi: false
+use_gaf: false
+max_gaf: 0.5
+
+##################################
+# Teacher forcing control        #
+##################################
+# tf_replacement: type of the mechanism that limits usage of the teacher forcing;
+# possible entries:
+#   'none' - teacher forcing is always used
+#   'global_mean' - some frames will be replaced by dataset global mean value
+#   'decoder_output' - some frames will be replaced by decoder outputs from previous step
+tf_replacement: "none"
+
+# p_tf_train, p_tf_val: probability with which frames will be treated in conventional teacher forcing mode
+# during training and validation respectively
+p_tf_train: 1.0
+p_tf_val: 1.0
+
+global_mean_npy: 'amai_global_mean.npy'

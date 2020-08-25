@@ -1,0 +1,3 @@
+[submodule "modules/tts"]
+	path = modules/tts
+	url = https://github.com/sovaai/sova-tts-binding
