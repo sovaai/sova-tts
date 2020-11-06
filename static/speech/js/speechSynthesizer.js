@@ -22,7 +22,7 @@ function send_form() {
         data.append("options", document.getElementById("options").value);
         data.append("voice", document.getElementById("model-select-id").value);
 
-        fetch("/tts/", { method: "post", body: data })
+        fetch("/synthesize/", { method: "post", body: data })
             .then((response) => {
                 if (!response.ok) throw response;
                 return response.json();
