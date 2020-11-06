@@ -1,58 +1,60 @@
 general:
-  logging_level: "debug"
-  log_to_file: false
-
   device: "cuda"
-
   pause_type: "silence"
-  sentence_as_unit: true
-
-  duration:
-    sentence_delimiter: 10000
-    semicolon: 5000
-    colon: 3000
-    comma: 2000
-    space: 1000
-
-  spectrogram:
-    plot: false
-    save: false
-
-  waves:
-    save: true
-    format: wav
-    sampling_rate: 22050
+  sample_rate: 22050
 
 natasha:
-  data:
-    language: "ru_trans"
-    stress: true
-    phonemes: false
-    unit_max_length: 150
+  voice_control_cfg: data/natasha/voice_natasha.yaml
+  user_dict: data/natasha/natasha_user_dict.json
 
-  paths:
-    hparams: data/natasha/hparams_natasha.yaml
-    model: data/natasha/checkpoint_natasha
-    vocoder: data/natasha/waveglow_ljs_nvidia.pt
-    dict: data/ru_trans.dic
-    spectrogram_folder:
-    waves_folder: data/waves
-    ref_audio:
-    voice_control_config: data/natasha/voice_natasha.yaml
+  text_handler:
+    config_path: data/text_handler_config.yaml
+    out_max_length: 200
+    dict_source: data/user_dict.json
+
+  modules:
+    engine: tacotron2
+    vocoder: waveglow
+
+  engine:
+    tacotron2:
+      model_path: data/natasha/checkpoint_natasha
+      hparams_path: data/natasha/hparams_natasha.yaml
+      options:
+        max_decoder_steps: 1500
+        gate_threshold: 0.5
+
+  vocoder:
+    waveglow:
+      model_path: data/natasha/waveglow_ljs_nvidia.pt
+      options:
+        sigma: 0.666
+        strength: 0.1
 
 ruslan:
-  data:
-    language: "ru_trans"
-    stress: true
-    phonemes: false
-    unit_max_length: 150
+  voice_control_cfg: data/ruslan/voice_ruslan.yaml
+  user_dict: data/ruslan/ruslan_user_dict.json
 
-  paths:
-    hparams: data/ruslan/hparams_ruslan.yaml
-    model: data/ruslan/checkpoint_ruslan
-    vocoder: data/ruslan/waveglow_ruslan.pt
-    dict: data/ru_trans.dic
-    spectrogram_folder:
-    waves_folder: data/waves
-    ref_audio:
-    voice_control_config: data/ruslan/voice_ruslan.yaml
+  text_handler:
+    config_path: data/text_handler_config.yaml
+    out_max_length: 200
+    dict_source: data/user_dict.json
+
+  modules:
+    engine: tacotron2
+    vocoder: waveglow
+
+  engine:
+    tacotron2:
+      model_path: data/ruslan/checkpoint_ruslan
+      hparams_path: data/ruslan/hparams_ruslan.yaml
+      options:
+        max_decoder_steps: 1500
+        gate_threshold: 0.5
+
+  vocoder:
+    waveglow:
+      model_path: data/ruslan/waveglow_ruslan.pt
+      options:
+        sigma: 0.666
+        strength: 0.1
