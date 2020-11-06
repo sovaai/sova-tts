@@ -10,7 +10,6 @@ natasha:
   text_handler:
     config_path: data/text_handler_config.yaml
     out_max_length: 200
-    dict_source: data/user_dict.json
 
   modules:
     engine: tacotron2
@@ -21,7 +20,7 @@ natasha:
       model_path: data/natasha/checkpoint_natasha
       hparams_path: data/natasha/hparams_natasha.yaml
       options:
-        max_decoder_steps: 1500
+        steps_per_symbol: 10
         gate_threshold: 0.5
 
   vocoder:
@@ -38,7 +37,6 @@ ruslan:
   text_handler:
     config_path: data/text_handler_config.yaml
     out_max_length: 200
-    dict_source: data/user_dict.json
 
   modules:
     engine: tacotron2
@@ -49,7 +47,7 @@ ruslan:
       model_path: data/ruslan/checkpoint_ruslan
       hparams_path: data/ruslan/hparams_ruslan.yaml
       options:
-        max_decoder_steps: 1500
+        steps_per_symbol: 10
         gate_threshold: 0.5
 
   vocoder:

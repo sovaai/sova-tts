@@ -1,0 +1,13 @@
+handler:
+  out_max_length: 200
+  charset: ru_trans
+  modules: [emphasizer, phonetizer]
+
+emphasizer:
+  type: rule_based
+  prefer_user: true
+  dict_source:
+
+phonetizer:
+  type: rule_based
+  dict_source:
