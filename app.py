@@ -66,8 +66,6 @@ def synthesize():
     }
 
 
-_valid_model_types = [key for key in models if key is not Config.ALL_MODELS_KEY]
-
 class InvalidVoice(Exception):
     pass
 
@@ -88,9 +86,9 @@ def get_user_dict():
 
         response_code = 0
     except InvalidVoice as e:
-        result = e
+        result = str(e)
     except Exception as e:
-        result = e
+        result = str(e)
 
     return {
         "response_code": response_code,
@@ -117,9 +115,9 @@ def update_user_dict():
         result = "User dictionary has been updated"
         response_code = 0
     except InvalidVoice as e:
-        result = e
+        result = str(e)
     except Exception as e:
-        result = e
+        result = str(e)
 
     return {
         "response_code": response_code,
@@ -146,9 +144,9 @@ def replace_user_dict():
         result = "User dictionary has been replaced"
         response_code = 0
     except InvalidVoice as e:
-        result = e
+        result = str(e)
     except Exception as e:
-        result = e
+        result = str(e)
 
     return {
         "response_code": response_code,
