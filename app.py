@@ -12,6 +12,8 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config["CORS_HEADERS"] = "Content-Type"
 
+_valid_model_types = [key for key in models if key is not Config.ALL_MODELS_KEY]
+
 
 @app.route('/', methods=["GET"])
 @cross_origin()
@@ -37,6 +39,22 @@ def parse_options(options):
             valid_options[opt] = factor
 
     return valid_options
+
+
+@app.route("/get_models/", methods=["POST"])
+@cross_origin()
+def get_models():
+    response_code = 1
+    try:
+        result = _valid_model_types
+        response_code = 0
+    except Exception as e:
+        result = str(e)
+
+    return {
+        "response_code": response_code,
+        "response": result
+    }
 
 
 @app.route("/synthesize/", methods=["POST"])
