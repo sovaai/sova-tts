@@ -6,7 +6,7 @@ handler:
 emphasizer:
   type: rule_based
   prefer_user: true
-  dict_source:
+  dict_source: ["data/stress.dict", "plane"]
 
 phonetizer:
   type: rule_based
