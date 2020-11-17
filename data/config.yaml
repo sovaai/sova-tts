@@ -8,7 +8,7 @@ natasha:
   user_dict: data/natasha/natasha_user_dict.json
 
   text_handler:
-    config_path: data/text_handler_config.yaml
+    config_path: data/natasha/text_handler_natasha.yaml
     out_max_length: 200
 
   modules:
@@ -35,7 +35,7 @@ ruslan:
   user_dict: data/ruslan/ruslan_user_dict.json
 
   text_handler:
-    config_path: data/text_handler_config.yaml
+    config_path: data/ruslan/text_handler_ruslan.yaml
     out_max_length: 200
 
   modules:
