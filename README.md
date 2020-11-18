@@ -95,7 +95,7 @@ $ tar -xvf Data.tar && rm Data.tar
 
 To test the service you can send a POST request:
 ```bash
-$ curl --request POST 'http://localhost:8899/tts/' --form 'voice=all' --form 'text="Добрый день!"'
+$ curl --request POST 'http://localhost:8899/synthesize/' --form 'voice=Natasha' --form 'text="Добрый день!"'
 ```
 
 ## Acknowledgements
