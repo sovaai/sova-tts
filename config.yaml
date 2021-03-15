@@ -3,12 +3,16 @@ general:
   pause_type: "silence"
   sample_rate: 22050
 
+  logging:
+    log_level: INFO
+    log_file:
+
 natasha:
   voice_control_cfg: data/natasha/voice_natasha.yaml
-  user_dict: data/natasha/natasha_user_dict.json
+  user_dict: data/user_dict.json
 
   text_handler:
-    config_path: data/natasha/text_handler_natasha.yaml
+    config: ru
     out_max_length: 200
 
   modules:
@@ -18,7 +22,7 @@ natasha:
   engine:
     tacotron2:
       model_path: data/natasha/checkpoint_natasha
-      hparams_path: data/natasha/hparams_natasha.yaml
+      hparams_path:
       options:
         steps_per_symbol: 10
         gate_threshold: 0.5
@@ -32,10 +36,10 @@ natasha:
 
 ruslan:
   voice_control_cfg: data/ruslan/voice_ruslan.yaml
-  user_dict: data/ruslan/ruslan_user_dict.json
+  user_dict: data/user_dict.json
 
   text_handler:
-    config_path: data/ruslan/text_handler_ruslan.yaml
+    config: ru
     out_max_length: 200
 
   modules:
@@ -45,7 +49,7 @@ ruslan:
   engine:
     tacotron2:
       model_path: data/ruslan/checkpoint_ruslan
-      hparams_path: data/ruslan/hparams_ruslan.yaml
+      hparams_path:
       options:
         steps_per_symbol: 10
         gate_threshold: 0.5

@@ -422,3 +422,10 @@ footer #copyright::before {
     width: 30%;
 }
 
+label {
+    display: inline-block;
+    width: 10em;
+    margin-right: .5em;
+    padding-top: .5em;
+    text-align:center;
+}

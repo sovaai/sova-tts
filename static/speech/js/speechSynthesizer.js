@@ -10,19 +10,31 @@ function send_form() {
     // If the user has pressed enter on textarea
     if (window.event.keyCode === 13) {
         TEXT_FIELD = document.getElementById("text-input");
-        OPTIONS = document.getElementById("options");
+        VOICE = document.getElementById("model-select-id")
+        PITCH_FACTOR = document.getElementById("pitch");
+        SPEED_FACTOR = document.getElementById("rate");
+        VOLUME_FACTOR = document.getElementById("volume");
         ERROR_FIELD = document.getElementById("error_field");
         SYNTHESIS_RESULT = document.getElementById("table_body_result");
 
         TEXT_FIELD.readOnly = true;
         ERROR_FIELD.style.display = "none";
 
-        var data = new FormData();
-        data.append("text", document.getElementById("text-input").value);
-        data.append("options", document.getElementById("options").value);
-        data.append("voice", document.getElementById("model-select-id").value);
+        var data = {
+            "text": TEXT_FIELD.value,
+            "voice": VOICE.value,
+            "rate": SPEED_FACTOR.value,
+            "pitch": PITCH_FACTOR.value,
+            "volume": VOLUME_FACTOR.value
+        }
 
-        fetch("/synthesize/", { method: "post", body: data })
+        fetch("/synthesize/", {
+                method: "post",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+             })
             .then((response) => {
                 if (!response.ok) throw response;
                 return response.json();
@@ -38,8 +50,8 @@ function send_form() {
                             "beforeend",
                             TR_PATTERN.format(
                                 model_ans["response_audio_url"],
-                                model_ans["time"],
-                                model_ans["name"]
+                                model_ans["synthesis_time"],
+                                model_ans["voice"]
                             )
                         );
                     });

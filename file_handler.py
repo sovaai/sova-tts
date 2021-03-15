@@ -1,8 +1,10 @@
 import time
 import logging
 
-from config import Config
-from models import models
+from models import models, ALL_MODELS
+
+
+WAVES_FOLDER = "data/waves/"
 
 
 class FileHandler:
@@ -19,7 +21,7 @@ class FileHandler:
 
     @staticmethod
     def get_models_results(text, model_type, **options):
-        if model_type == Config.ALL_MODELS_KEY:
+        if model_type == ALL_MODELS:
             current_models = {key: val for key, val in models.items() if val is not None}
         else:
             current_models = {model_type: models[model_type]}
@@ -27,19 +29,25 @@ class FileHandler:
         results = []
         for model_name, model in current_models.items():
             start = time.time()
-            audio = model.synthesize(text, **options)
-            filename = model.save(audio, Config.WAVES_FOLDER)
 
+            audio = model.synthesize(text, **options)
+            filename = model.save(audio, WAVES_FOLDER)
             with open(filename, "rb") as f:
                 audio_bytes = f.read()
+
             end = time.time()
+
+            sample_rate = model.sample_rate
+            duration = len(audio) / sample_rate
 
             results.append(
                 {
-                    'name': model_name,
-                    'time': round(end - start, 3),
-                    'filename': filename,
-                    'response_audio': audio_bytes
+                    "voice": model_name,
+                    "sample_rate": sample_rate,
+                    "duration_s": round(duration, 3),
+                    "synthesis_time": round(end - start, 3),
+                    "filename": filename,
+                    "response_audio": audio_bytes
                 }
             )
 

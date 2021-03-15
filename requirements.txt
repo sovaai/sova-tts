@@ -4,7 +4,7 @@ gunicorn==19.9.0
 uuid==1.30
 bs4==0.0.1
 numpy==1.19.1
-torch==1.4.0
+torch>=1.4.0
 scipy==1.5.2
 Unidecode==1.1.1
 soundfile==0.10.3.post1
@@ -16,4 +16,4 @@ librosa==0.8.0
 inflect>=0.2.5
 nltk==3.5.0
 loguru==0.5.3
--e git+https://github.com/sovaai/sova-tts-tps@v1.0.1#egg=TPS
+-e git+https://github.com/sovaai/sova-tts-tps@v1.1.0#egg=TPS

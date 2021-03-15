@@ -1,3 +1,6 @@
-[submodule "modules/tts"]
-	path = modules/tts
-	url = https://github.com/sovaai/sova-tts-binding
+[submodule "tts/backend/waveglow"]
+	path = tts/backend/waveglow
+	url = https://github.com/sovaai/sova-tts-vocoder
+[submodule "tts/backend/tacotron2"]
+	path = tts/backend/tacotron2
+	url = https://github.com/sovaai/sova-tts-engine

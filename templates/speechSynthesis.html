@@ -22,8 +22,35 @@
             {% endfor %}
         </select>
 
-        <textarea id="options" placeholder="Additional options form: tone_factor={0.75..1.5}, speed_factor={0.5..2.0}"></textarea>
-	<textarea id="text-input" onkeypress="send_form()" placeholder='Text area: type text and press "enter"'></textarea>
+        <div id="additional_options">
+            <label for="pitch">Pitch
+                <input type="range" min="0.75" max="1.5" step="0.05" value="1.0" id="pitch" list="pitch_tickmarks">
+            </label>
+            <datalist id="pitch_tickmarks">
+                <option value="0.75" label="75%"></option>
+                <option value="1.0" label="100%"></option>
+                <option value="1.5" label="150%"></option>
+            </datalist>
+
+            <label for="rate">Speed
+                <input type="range" min="0.5" max="2.0" step="0.1" value="1.0" id="rate" list="rate_tickmarks">
+            </label>
+            <datalist id="rate_tickmarks">
+                <option value="0.5" label="50%"></option>
+                <option value="1.0" label="100%"></option>
+                <option value="2.0" label="200%"></option>
+            </datalist>
+
+            <label for="volume">Volume
+                <input type="range" min="-12" max="12" step="0.5" value="0.0" id="volume" list="volume_tickmarks">
+            </label>
+            <datalist id="volume_tickmarks">
+                <option value="-12" label="50%"></option>
+                <option value="0.0" label="100%"></option>
+                <option value="12" label="200%"></option>
+            </datalist>
+        </div>
+        <textarea id="text-input" onkeypress="send_form()" placeholder='Text area: type text and press "enter"'></textarea>
         <div id="error_field" style="display: none;"></div>
 
     </section>
@@ -32,9 +59,9 @@
             <table id="table_result">
                 <thead>
                 <tr>
-		    <th class="model_audio">Audio</th>
+		            <th class="model_audio">Audio</th>
                     <th class="model_time">Synthesis time</th>
-		    <th class="model_name">Voice</th>
+        		    <th class="model_name">Voice</th>
                 </tr>
                 </thead>
                 <tbody id="table_body_result">
