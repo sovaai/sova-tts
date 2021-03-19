@@ -4,14 +4,11 @@ from tts.synthesizer import Synthesizer, set_logger
 ALL_MODELS = "all"
 
 config = Synthesizer.load_config("config.yaml")
-
 set_logger(**config["general"].pop("logging"))
 
-ruslan_config = config["ruslan"]
-
 natasha = Synthesizer.from_config(config, name="natasha")
-# ruslan = Synthesizer.from_config(config, name="ruslan")
 
+ruslan_config = config["ruslan"]
 ruslan = Synthesizer(
     name="ruslan",
     text_handler=natasha.text_handler,

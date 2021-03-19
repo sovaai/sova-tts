@@ -65,10 +65,10 @@ $ sudo systemctl restart docker.service
 
 *   Clone the repository, download the pretrained models archive and extract the contents into the project folder:
 ```bash
-$ git clone --recursive https://github.com/sovaai/sova-tts.git --branch v1.0
+$ git clone --recursive https://github.com/sovaai/sova-tts.git --branch v1.1
 $ cd sova-tts/
-$ wget http://dataset.sova.ai/SOVA-TTS/Data_v1.0.tar
-$ tar -xvf Data_v1.0.tar && rm Data_v1.0.tar
+$ wget http://dataset.sova.ai/SOVA-TTS/Data_v1.1.tar
+$ tar -xvf Data_v1.1.tar && rm Data_v1.1.tar
 ```
 
 *   Build docker image
