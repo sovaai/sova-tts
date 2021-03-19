@@ -67,8 +67,8 @@ $ sudo systemctl restart docker.service
 ```bash
 $ git clone --recursive https://github.com/sovaai/sova-tts.git --branch v1.0
 $ cd sova-tts/
-$ wget http://dataset.sova.ai/SOVA-TTS/Data_v10.tar
-$ tar -xvf Data_v10.tar && rm Data_v10.tar
+$ wget http://dataset.sova.ai/SOVA-TTS/Data_v1.0.tar
+$ tar -xvf Data_v1.0.tar && rm Data_v1.0.tar
 ```
 
 *   Build docker image
