@@ -249,8 +249,11 @@ class Synthesizer:
             logger.debug("Loading synthesizer from config file {}".format(os.path.abspath(config)))
 
         config = cls.load_config(config)
-
         params = config["general"]
+
+        if "logging" in params:
+            set_logger(**params.pop("logging"))
+
         params["name"] = name
         device = params["device"]
         assert device is not None
