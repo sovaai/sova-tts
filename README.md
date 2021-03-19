@@ -95,7 +95,12 @@ $ tar -xvf Data_v1.1.tar && rm Data_v1.1.tar
 
 To test the service you can send a POST request:
 ```bash
-$ curl --request POST 'http://localhost:8899/synthesize/' --form 'voice=Natasha' --form 'text="Добрый день!"'
+$ curl --request POST 'http://localhost:8899/synthesize/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "text": "Добрый день! Как ваши дел+а?",
+    "voice": "Natasha"
+}'
 ```
 
 ## Acknowledgements
