@@ -8,7 +8,6 @@ import soundfile
 from loguru import logger
 
 from tps import Handler, load_dict, save_dict, ssml
-from tps.types import Charset
 
 root_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, root_path)
@@ -322,12 +321,6 @@ def _load_text_handler(config_dict):
     config = config_dict["config"]
     assert config is not None
 
-    if config in Charset._member_names_:
-        handler = Handler.from_charset(config, out_max_length, silent=True)
-    else:
-        handler_config = Synthesizer.load_config(config)
-        handler_config["handler"]["out_max_length"] = out_max_length
-
-        handler = Handler.from_config(handler_config)
+    handler = Handler.from_charset(config, out_max_length, silent=True)
 
     return handler

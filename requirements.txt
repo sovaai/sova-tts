@@ -16,4 +16,4 @@ librosa==0.8.0
 inflect>=0.2.5
 nltk==3.5.0
 loguru==0.5.3
--e git+https://github.com/sovaai/sova-tts-tps@v1.1.0#egg=TPS
+-e git+https://github.com/sovaai/sova-tts-tps@v1.2.0#egg=TPS
